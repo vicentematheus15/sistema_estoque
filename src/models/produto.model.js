@@ -15,14 +15,8 @@ export const Produto = sequelize.define('Produto',
         categoria: {
             type: DataTypes.ENUM('Produtos Quimicos', 'Ferramentas e Acessorios', 'Equipamentos de Protecao'),
             allowNull: false,
-            set(value) {
-                this.setDataValue(
-                    'categoria',
-                    value?.toLowerCase()
-                )
-            }
         },
-        valor: {
+        valor_unitario: {
             type: DataTypes.DECIMAL,
             allowNull: false
         }
@@ -31,3 +25,5 @@ export const Produto = sequelize.define('Produto',
         timestamps: true
     }
 )
+
+export default Produto
