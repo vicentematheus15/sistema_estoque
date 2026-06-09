@@ -26,8 +26,11 @@ export const Produto = sequelize.define('Produto',
             }
         },
         valor_unitario: {
-            type: DataTypes.DECIMAL,
-            allowNull: false
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: false,
+            validate: {
+                min: 0.01
+            }
         }
     }, {
     tableName: 'produtos',

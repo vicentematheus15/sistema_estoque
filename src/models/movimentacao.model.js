@@ -12,7 +12,6 @@ export const Movimentacao = sequelize.define('movimentacao',
         id_produto: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
             references: {
                 model: Produto,
                 key: 'id_produto'
@@ -28,8 +27,7 @@ export const Movimentacao = sequelize.define('movimentacao',
             allowNull: false,
             defaultValue: 0,
             validate: {
-                min: 0,
-                max: 100
+                min: 0
             }
         },
         data_movimentacao: {
