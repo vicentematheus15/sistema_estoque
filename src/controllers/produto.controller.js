@@ -15,6 +15,7 @@ export async function listarProdutos(req, res) {
 export async function cadastrarProdutos (req, res) {
     try {
         const {nome, categoria, quantidade, valor_unitario } = req.body;
+        
         if (!nome || !categoria || !quantidade || !valor_unitario){
             return res.status(400).json({erro: 'Dados incompletos!'})
         }
