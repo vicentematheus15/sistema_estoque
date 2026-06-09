@@ -2,9 +2,9 @@ import sequelize from "../database/database.js";
 import { DataTypes } from "sequelize";
 import { Produto } from "./produto.model.js";
 
-export const Estoque = sequelize.define('estoque',
+export const Movimentacao = sequelize.define('movimentacao',
     {
-        id_estoque: {
+        id_movimentacao: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
@@ -18,6 +18,11 @@ export const Estoque = sequelize.define('estoque',
                 key: 'id_produto'
             }
         },
+        tipo: {
+            type: DataTypes.ENUM('entrada', 'saida'),
+            allowNull: false,
+
+        },
         quantidade: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -26,15 +31,20 @@ export const Estoque = sequelize.define('estoque',
                 min: 0,
                 max: 100
             }
+        },
+        data_movimentacao: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
         }
     }, {
-    tableName: 'estoque',
+    tableName: 'movimentacao',
     timestamps: true
 }
 )
 
-Produto.hasOne(Estoque, { foreignKey: 'id_produto' })
+Produto.hasMany(Movimentacao, { foreignKey: 'id_produto' })
 
-Estoque.belongsTo(Produto, { foreignKey: 'id_produto' })
+Movimentacao.belongsTo(Produto, { foreignKey: 'id_produto' })
 
-export { Produto, Estoque }
+export { Produto, Movimentacao }
