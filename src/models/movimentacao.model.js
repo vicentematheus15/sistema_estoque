@@ -2,7 +2,7 @@ import sequelize from "../database/database.js";
 import { DataTypes } from "sequelize";
 import { Produto } from "./produto.model.js";
 
-export const Movimentacao = sequelize.define('movimentacao',
+const Movimentacao = sequelize.define('movimentacao',
     {
         id_movimentacao: {
             type: DataTypes.INTEGER,

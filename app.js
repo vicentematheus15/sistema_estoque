@@ -1,6 +1,6 @@
 import 'dotenv/config';
-import sequelize from './database/database.js';
 import express from 'express';
+import sequelize from './src/database/database.js';
 import produtoRoutes from './src/routes/produto.routes.js';
 
 import './src/models/produto.model.js';
