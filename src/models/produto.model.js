@@ -16,14 +16,23 @@ export const Produto = sequelize.define('Produto',
             type: DataTypes.ENUM('Produtos Quimicos', 'Ferramentas e Acessorios', 'Equipamentos de Protecao'),
             allowNull: false,
         },
+        quantidade: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 100
+            }
+        },
         valor_unitario: {
             type: DataTypes.DECIMAL,
             allowNull: false
         }
     }, {
-        tableName: 'produtos',
-        timestamps: true
-    }
+    tableName: 'produtos',
+    timestamps: true
+}
 )
 
 export default Produto
