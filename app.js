@@ -1,10 +1,20 @@
 import 'dotenv/config';
 import sequelize from './database/database.js';
 import express from 'express';
+import produtoRoutes from './src/routes/produto.routes.js';
 
-import Produto from './src/models/produto.model.js'
+import './src/models/produto.model.js';
+import './src/models/movimentacao.model.js';
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
+app.use('/produtos', produtoRoutes);
+// app.use('/movimentacoes', movimentacoesRoutes);
+
+sequelize.sync({ alter: true }).then(() => {
+    app.listen(process.env.API_PORT, () => 
+        console.log(`Servidor rodando em http://localhost:${process.env.API_PORT}`)
+    );
+});
