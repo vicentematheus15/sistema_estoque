@@ -2,7 +2,15 @@ import {Produto, Movimentacao}  from '../models/movimentacao.model.js';
 import sequelize from '../database/database.js';
 import { Op } from 'sequelize'
 
-
+export async function listarProdutos(req, res) {
+    try {
+        const todosProdutos = await Produto.findAll();
+        return res.status(201).json(todosProdutos)
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+}
 
 export async function cadastrarProdutos (req, res) {
     try {
