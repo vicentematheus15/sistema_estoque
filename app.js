@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/produtos', produtoRoutes);
-// app.use('/movimentacoes', movimentacoesRoutes);
+app.use('/movimentacoes', movimentacoesRoutes);
 
 sequelize.sync({ alter: true }).then(() => {
     app.listen(process.env.API_PORT, () => 
