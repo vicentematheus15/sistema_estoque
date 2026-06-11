@@ -3,7 +3,7 @@ import * as controller from '../controllers/movimentacao.controller.js';
 
 const movimentacoesRoutes = Router();
 
-movimentacoesRoutes.posy('entrada', controller.entradaProdutos)
+movimentacoesRoutes.post('entrada', controller.entradaProdutos)
 
 
 export default movimentacoesRoutes;
