@@ -27,10 +27,20 @@ export async function entradaProdutos(req, res) {
     //incrementa a qtd de produtos da movimentação na qtd de produtos em estoque
     await produtoAlvo.increment('quantidade', { by: Number(quantidade) });
 
-    res.status(201).json({
+    produtoAlvo.reload() //atualiza a quantidade após a movimentacao
+
+    const resposta = {
         mensagem: 'Entrada registrada com sucesso!',
         movimentacao: novaMovimentacao
-    });
+    }
+
+    //anexa um alerta na resposta caso a quantidade de produto atinja um limite
+    if(produtoAlvo.quantidade >= 100){
+        resposta.alerta = `Produto atingiu o limite máximo de estoque! Quantidade atual: ${produtoAlvo.quantidade}`;
+    }
+
+
+    return res.status(201).json(resposta);
 
    } catch (error) {
     console.error(error);
