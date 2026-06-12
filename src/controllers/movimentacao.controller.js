@@ -96,3 +96,4 @@ export async function saidaProdutos(req, res) {
         return res.status(500).json({ erro: 'Erro interno do servidor' });
     }
 }
+
