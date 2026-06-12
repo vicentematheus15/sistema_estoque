@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import sequelize from './src/database/database.js';
 import produtoRoutes from './src/routes/produto.routes.js';
+import movimentacoesRoutes from './src/routes/movimentacoes.routes.js'
 
 import './src/models/produto.model.js';
 import './src/models/movimentacao.model.js';
