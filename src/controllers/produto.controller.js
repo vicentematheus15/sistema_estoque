@@ -39,3 +39,26 @@ export async function cadastrarProdutos (req, res) {
         return res.status(500).json({ erro: 'Erro interno do servidor' });
     }
 }
+
+export async function valorTotalCategorias(req, res){
+    try {
+        const resultado = await Produto.findAll({
+            attributes: [
+                'categoria',
+                [sequelize.fn('SUM', 
+                    sequelize.literal('quantidade * valor_unitario')
+                ), 'valor_total']
+            ],
+            group: ['categoria']
+        })
+
+        if(resultado.length === 0){
+            return res.status(404).json({erro: 'Nenhum produto encontrado'})
+        }
+
+        return res.status(200).json(resultado)
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+}
