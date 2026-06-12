@@ -97,3 +97,22 @@ export async function saidaProdutos(req, res) {
     }
 }
 
+export async function buscarSaidasPorData(req, res){
+    try {
+        const saidasPorData = await Movimentacao.findAll({
+            where: {
+                tipo: 'saida'
+            }, 
+            order: [['data_movimentacao', 'DESC']]
+        })
+
+        if(!saidasPorData){
+            return res.status(404).json({ erro: 'As movimentações de saída não foram encontradas.' })
+        }
+
+        return res.status(200).json(saidasPorData)
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+}
