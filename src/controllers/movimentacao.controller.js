@@ -106,8 +106,8 @@ export async function buscarSaidasPorData(req, res){
             order: [['data_movimentacao', 'DESC']]
         })
 
-        if(!saidasPorData){
-            return res.status(404).json({ erro: 'As movimentações de saída não foram encontradas.' })
+        if(saidasPorData.length === 0){
+            return res.status(404).json({ erro: 'Nenhuma movimentação de saída encontrada.' })
         }
 
         return res.status(200).json(saidasPorData)
@@ -116,3 +116,4 @@ export async function buscarSaidasPorData(req, res){
         return res.status(500).json({ erro: 'Erro interno do servidor' });
     }
 }
+
