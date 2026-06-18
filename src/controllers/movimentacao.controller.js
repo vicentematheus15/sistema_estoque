@@ -96,3 +96,45 @@ export async function saidaProdutos(req, res) {
         return res.status(500).json({ erro: 'Erro interno do servidor' });
     }
 }
+
+export async function relatorioPorPeriodo(req, res){
+    try {
+        const {data_inicial, data_final} = req.body
+
+        if(!data_inicial || !data_final){
+            return res.status(400).json({ erro: 'Informe data_inicial e data_final!' });
+        }
+
+        const relatorio = await Movimentacao.findAll({
+            attributes: [
+                [sequelize.col('Produto.nome'), 'nome_produto'],
+                [
+                    sequelize.fn('SUM',
+                        sequelize.literal(`CASE WHEN tipo='entrada' THEN quantidade ELSE 0 END`)
+                    ),
+                    'total_entradas'
+                ],
+                [
+                    sequelize.fn('SUM', 
+                        sequelize.literal(`CASE WHEN tipo='saida' THEN quantidade ELSE 0 AND`)
+                    ),
+                    'total_saidas'
+                ],
+                [
+                    sequelize.literal(`
+                        SUM(CASE WHEN tipo='entrada' THEN quantidade ELSE 0 END) -
+                        SUM(CASE WHEN tipo = 'saida' THEN quantidade ELSE 0 END)
+                    `),
+                    'saldo_periodo'
+                ]
+            ]
+        })
+
+    
+
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+}
