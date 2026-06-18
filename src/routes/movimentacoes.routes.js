@@ -5,6 +5,7 @@ const movimentacoesRoutes = Router();
 
 movimentacoesRoutes.post('/entrada', controller.entradaProdutos)
 movimentacoesRoutes.post('/saida', controller.saidaProdutos)
+movimentacoesRoutes.get('/saidasData', controller.buscarSaidasPorData)
 
 
 
