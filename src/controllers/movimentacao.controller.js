@@ -97,7 +97,6 @@ export async function saidaProdutos(req, res) {
     }
 }
 
-<<<<<<< HEAD
 export async function relatorioPorPeriodo(req, res){
     try {
         const {data_inicial, data_final} = req.body
@@ -130,33 +129,33 @@ export async function relatorioPorPeriodo(req, res){
                 ]
             ]
         })
+        } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: 'Erro interno do servidor' });
+    }
+}
 
     
 
 
-=======
-export async function buscarSaidasPorData(req, res){
-    try {
-        const saidasPorData = await Movimentacao.findAll({
-            where: {
-                tipo: 'saida'
-            }, 
-            order: [['data_movimentacao', 'DESC']]
-        })
+// export async function buscarSaidasPorData(req, res){
+//     try {
+//         const saidasPorData = await Movimentacao.findAll({
+//             where: {
+//                 tipo: 'saida'
+//             }, 
+//             order: [['data_movimentacao', 'DESC']]
+//         })
 
-        if(saidasPorData.length === 0){
-            return res.status(404).json({ erro: 'Nenhuma movimentação de saída encontrada.' })
-        }
+//         if(saidasPorData.length === 0){
+//             return res.status(404).json({ erro: 'Nenhuma movimentação de saída encontrada.' })
+//         }
 
-        return res.status(200).json(saidasPorData)
->>>>>>> ab903fe1afd6e8fc2949fe600adc1f90af2f53c8
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ erro: 'Erro interno do servidor' });
-    }
-<<<<<<< HEAD
-}
-=======
-}
+//         return res.status(200).json(saidasPorData)
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ erro: 'Erro interno do servidor' });
+//     }
+// }
+// }
 
->>>>>>> ab903fe1afd6e8fc2949fe600adc1f90af2f53c8
